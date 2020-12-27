@@ -119,6 +119,91 @@ System.out.println(cnt == 0 ? "YES" : "NO");
     toArray, toArray
     
 
+#### [#issue3] 덱(Deque, Double-ended Queue)의 개념
+    * 덱(Deque, Double-ended Queue)이란
+        * 양쪽 끝에서 삽입과 삭제가 모두 가능한 자료 구조의 한 형태
+        * public interface Deque<E> extends Queue<E>
+        * 큐와 스택을 합친 형태로 생각할 수 있다.
+        
+    * Implementing Class
+        * ArrayDeque
+            * Deque 인터페이스를 구현한 Resizable-Array. 
+            * external synchronization이 되어있지 않아서 thread-safe하지 않음
+        * ConcurrentLinkedDeque
+            * Linked node로 이루어진 Concurrent deque
+        * Concurrent - : 
+            * multiple thread 환경에서 Element(node)를 삽입, 제거, 접근을 병렬적으로 처리할 수 있도록 하는 컬렉션들         
+        * LinkedBlockingDeque
+            * Linkded node로 이루어진 Deque. 
+            * Integer.MAX_VALUE의 크기까지만 생성이 가능
+        * LinkedList
+            * List와 Deque를 구현한 Doubly-Linked List
+
+* [Deque Implementations 참고](https://docs.oracle.com/javase/tutorial/collections/implementations/deque.html)
+        
+        
+#### [#issue3-1] 덱(Deque, Double-ended Queue) 관련 메서드
+![](/contents/images/deque-method.png)
+
+* Methods inherited from interface ***java.util.Collection***
+    * addAll, clear, containsAll, equals, hashCode, **isEmpty,** removeAll, retainAll, toArray, toArray
+    
+* [https://docs.oracle.com/javase/7/docs/api/java/util/Deque.html 참고](https://docs.oracle.com/javase/7/docs/api/java/util/Deque.html)
+        
+        
+        
+#### [#issue4] String indexOf()의 사용법 
+    * indexOf(inc ch)
+        * String에서 첫 번째 ch index 반환
+        * default : -1
+    * indexOf(String s)
+        * String에서 첫 번째 s의 시작 index 반환
+    * indexOf(int ch, int beginIndex)
+        * String에서 beginIndex이상의 첫 번째 ch index 반환
+    * indexOf(String s, int beginIndex)
+        * String에서 beginIndex이상의 첫 번째 s의 시작 index 반환
+
+* Ex) 알파벳 소문자로만 이루어진 단어 s에서 각각의 알파벳에 대해서, 단어에 포함되어 있는 경우에는 처음 등장하는 위치를, 포함되어 있지 않은 경우에는 -1을 출력하기
+~~~java
+String s = "dohee";
+for(int i='a'; i<='z'; i++) {
+    System.out.print(S.indexOf(i)+" ");
+}
+// 출력 : -1 -1 -1 1 2 -1 -1 1 -1 -1 -1 -1 -1 -1 1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+~~~
+
+
+
+#### [#issue5] String substring()의 사용법
+    * substring(int beginIndex)
+        * beginIndex 부터 끝까지 모든 문자열 반환
+    * substring(int beginIndex, int endIndex)
+        * beginIndex 부터 endIndex까지의 문자열 반환
+  
+* Ex) 문자열 s가 주어졌을 때, 모든 접미사를 사전순으로 정렬한 다음 출력하기      
+~~~java
+String s = "dohee";
+String[] suffix = new String[s.length()];
+
+for (int i=0; i<s.length(); i++){
+    suffix[i] = s.substring(i);
+}
+Arrays.sort(suffix);
+for (int i=0; i<s.length(); i++){
+    System.out.println(suffix[i]);
+}
+
+/* 출력
+   dohee
+   e
+   ee
+   hee
+   ohee
+*/
+~~~
+
+
+
 ### Reference
 > - [https://docs.oracle.com/javase/7/docs/api/java/util/Stack.html](https://docs.oracle.com/javase/7/docs/api/java/util/Stack.html)
 > - [https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html](https://docs.oracle.com/javase/7/docs/api/java/util/Queue.html)
